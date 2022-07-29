@@ -139,7 +139,7 @@ bool DS1307::autoTime()
 	int weekday = (d+=m<3?y--:y-2,23*m/9+d+4+y/4-y/100+y/400)%7 + 1;
 	_time[TIME_DAY] = DECtoBCD(weekday);
 	
-	setTime(_time, TIME_ARRAY_LENGTH);
+	return setTime(_time, TIME_ARRAY_LENGTH);
 }
 
 // update -- Read all time/date registers and update the _time array
@@ -322,9 +322,9 @@ bool DS1307::setYear(uint8_t y)
 bool DS1307::set12Hour(bool enable12)
 {
 	if (enable12)
-		set24Hour(false);
+		return set24Hour(false);
 	else
-		set24Hour(true);
+		return set24Hour(true);
 }
 
 // set24Hour -- set (or not) to 24-hour mode) | enable24 defaults to  true
